@@ -1,0 +1,35 @@
+name: Build and test changes on pull requests
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+env:
+  COMPOSE_TEST_FILE_NAME: "docker-compose.test.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.5.8
+
+      - name: Build app
+        run: bundle install
+
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run tests
+        run: rubocop
