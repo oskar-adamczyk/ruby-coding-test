@@ -24,8 +24,7 @@ jobs:
           ruby-version: 2.5.8
           bundler-cache: true
 
-      - name: Build app
-        run: bundle install
-
-      - name: Run tests
-        run: rubocop
+      - name: Build and test app
+        run: |
+          bundle install
+          rubocop
