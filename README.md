@@ -66,15 +66,23 @@ That's it!
 
 ### Made assumptions
 
-I have worked with ruby 2.5.8 version. It seems to be compatible with gems but in addition, it is supported by rubocop
+1. I have worked with ruby 2.5.8 version. It seems to be compatible with gems but in addition, it is supported by rubocop
 that I wanted to have here badly :)
+2. I have introduced docker-compose. It may be a bit over exaggeration, but considering successful company, we would most likely
+at some point of time need more reliable persistence layer. That's why I decided to introduce dockerization with psql
+service defined in docker-compose. It would allow us not only deploy application on cloud solution (e.g. k8s cluster)
+but with easier test setup (already exsiting test instance of database) we can perform tests on CI pipeline easily.
+3. Dockerization itself is best way to avoid SOA1 incidents and it is way easier to setup local env this way, at least
+from my perspective :)
+4. Selected psql because a) Personally, I feel comfortable with this sql engine b) Flexibility and power is quite high
+comparing to downside of a bit higher entry threshold :)
 
 TODOs:
 
 - preparation
 - [x] static analysis cleanup 
 - [x] CI github actions pipeline
-- [ ] dockerize
+- [x] dockerize
 - This f****** system doesn't even load some leaderboards!
 - [ ] setup easier reproduction env (seeds, factories, etc.)
 - [ ] investigate issue

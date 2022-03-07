@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+      target: dev
+      args:
+        - UID=1000
+    env_file:
+      - ./.env.example
+    environment:
+      RAILS_ENV: test
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13.1-alpine
+    environment:
+      POSTGRES_USER: rct
+      POSTGRES_PASSWORD: rct
+      ALLOW_IP_RANGE: 0.0.0.0/0
+    command: -c log_min_messages=PANIC -c log_min_error_statement=PANIC
