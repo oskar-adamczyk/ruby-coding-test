@@ -123,5 +123,3 @@ NiceToHaves:
 - [X] CI with dockerization
 - [X] brakeman integration
 - [ ] SonarCloud integration
-
-> :warning: **I will extend it later on, probably will di vide feature to smaller chunks.
