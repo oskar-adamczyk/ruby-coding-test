@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rubocop || exit 1
+bundle exec rubocop || exit 1
