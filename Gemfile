@@ -22,6 +22,10 @@ group :development, :test do
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
+  # Generates a test coverage report on every `bundle exec rspec` call. We use
+  # the output to feed SonarCloud's stats and analysis. It does not yet support
+  # version >= 0.18 hence locked to 0.17.1
+  gem "simplecov", "~> 0.17.1", require: false
 end
 
 group :development do

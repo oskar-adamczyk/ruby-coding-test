@@ -76,6 +76,11 @@ but with easier test setup (already exsiting test instance of database) we can p
 from my perspective :)
 4. Selected psql because a) Personally, I feel comfortable with this sql engine b) Flexibility and power is quite high
 comparing to downside of a bit higher entry threshold :)
+5. I assumed that we always (by default) want to order entries by score (from SQL perspective considering
+NULL values). Maybe it is too bold, but I thought about it as something quite natural to
+order entries this way - as well from business perspective. I would ofc ask about that in real life environment ;)
+I assumed as well that for some reason it is possible to have NULL score (e.g. initializing entry). Again, normally
+I would ask if this should be possible and if not - then constrain it via validation on model + NOT NULL on DB
 
 TODOs:
 
@@ -87,8 +92,8 @@ TODOs:
 - [X] setup easier reproduction env (seeds, factories, etc.)
 - [X] investigate issue
 - [X] prepare test for investigated issue
-- [ ] introduce fix
-- [ ] verify fix with additional preparation of verification steps
+- [X] introduce fix
+- [X] verify fix with additional preparation of verification steps (already done by seeds including one NULL entry)
 - Last night I lost my score. I had 10 points, ...
 - [ ] setup easier reproduction env (seeds, factories, etc.)
 - [ ] investigate issue
