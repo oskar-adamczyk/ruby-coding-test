@@ -146,11 +146,11 @@ RSpec.describe LeaderboardsController, type: :controller do
 
     # when
     before do
-      threads = 10.times.map do
+      threads = 3.times.map do
         Thread.new do
           post :add_score, params: { id: leaderboard.id, username: entry.username, score: 10 }
         rescue AbstractController::DoubleRenderError
-          pp "Double render - no rspec solution for concurrent requests yet."
+          Rails.logger.debug "Double render - no rspec solution for concurrent requests yet"
         end
       end
       threads.each(&:join)
@@ -158,6 +158,6 @@ RSpec.describe LeaderboardsController, type: :controller do
 
     # then
 
-    it { expect(entry.reload.score).to eq 100 }
+    it { expect(entry.reload.score).to eq 30 }
   end
 end
