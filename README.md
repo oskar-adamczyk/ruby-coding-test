@@ -84,7 +84,7 @@ I would ask if this should be possible and if not - then constrain it via valida
 6. Attached Simplecov to calculate code coverage. It is quite low but I left it as it is - I would love
 to improve it in future, but not waste time on that when I have some crucial hotfixes and feature to deliver.
 If I would use SonarCloud, we could setup additional, separate coverage threshold only for new / touched code.
-
+7. Updated some dependencies according to brakeman results.
 
 TODOs:
 
@@ -108,7 +108,7 @@ TODOs:
 
 NiceToHaves:
 - [x] CI with dockerization
-- [ ] brakeman integration
+- [x] brakeman integration
 - [ ] SonarCloud integration
 
 > :warning: **I will extend it later on, probably will di vide feature to smaller chunks.
