@@ -81,6 +81,10 @@ NULL values). Maybe it is too bold, but I thought about it as something quite na
 order entries this way - as well from business perspective. I would ofc ask about that in real life environment ;)
 I assumed as well that for some reason it is possible to have NULL score (e.g. initializing entry). Again, normally
 I would ask if this should be possible and if not - then constrain it via validation on model + NOT NULL on DB
+6. Attached Simplecov to calculate code coverage. It is quite low but I left it as it is - I would love
+to improve it in future, but not waste time on that when I have some crucial hotfixes and feature to deliver.
+If I would use SonarCloud, we could setup additional, separate coverage threshold only for new / touched code.
+
 
 TODOs:
 
@@ -95,15 +99,15 @@ TODOs:
 - [X] introduce fix
 - [X] verify fix with additional preparation of verification steps (already done by seeds including one NULL entry)
 - Last night I lost my score. I had 10 points, ...
-- [ ] setup easier reproduction env (seeds, factories, etc.)
-- [ ] investigate issue
+- [X] setup easier reproduction env (seeds, factories, etc.) (won't be done)
+- [X] investigate issue
 - [ ] prepare test for investigated issue
 - [ ] introduce fix
 - [ ] verify fix with additional preparation of verification steps
 - I want to be able to see see all scores added ...
 
 NiceToHaves:
-- [ ] CI with dockerization
+- [x] CI with dockerization
 - [ ] brakeman integration
 - [ ] SonarCloud integration
 
