@@ -8,6 +8,12 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+unless Rails.env.production?
+  require "dotenv-rails"
+  Dotenv::Railtie.load
+  Spring.watch "app/services/**"
+end
+
 module Leaderboards
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

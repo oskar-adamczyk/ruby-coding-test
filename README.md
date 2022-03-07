@@ -76,6 +76,15 @@ but with easier test setup (already exsiting test instance of database) we can p
 from my perspective :)
 4. Selected psql because a) Personally, I feel comfortable with this sql engine b) Flexibility and power is quite high
 comparing to downside of a bit higher entry threshold :)
+5. I assumed that we always (by default) want to order entries by score (from SQL perspective considering
+NULL values). Maybe it is too bold, but I thought about it as something quite natural to
+order entries this way - as well from business perspective. I would ofc ask about that in real life environment ;)
+I assumed as well that for some reason it is possible to have NULL score (e.g. initializing entry). Again, normally
+I would ask if this should be possible and if not - then constrain it via validation on model + NOT NULL on DB
+6. Attached Simplecov to calculate code coverage. It is quite low but I left it as it is - I would love
+to improve it in future, but not waste time on that when I have some crucial hotfixes and feature to deliver.
+If I would use SonarCloud, we could setup additional, separate coverage threshold only for new / touched code.
+
 
 TODOs:
 
@@ -84,17 +93,22 @@ TODOs:
 - [x] CI github actions pipeline
 - [x] dockerize
 - This f****** system doesn't even load some leaderboards!
-- [ ] setup easier reproduction env (seeds, factories, etc.)
-- [ ] investigate issue
-- [ ] prepare test for investigated issue
-- [ ] introduce fix
-- [ ] verify fix with additional preparation of verification steps
+- [X] setup easier reproduction env (seeds, factories, etc.)
+- [X] investigate issue
+- [X] prepare test for investigated issue
+- [X] introduce fix
+- [X] verify fix with additional preparation of verification steps (already done by seeds including one NULL entry)
 - Last night I lost my score. I had 10 points, ...
-- [ ] setup easier reproduction env (seeds, factories, etc.)
-- [ ] investigate issue
+- [X] setup easier reproduction env (seeds, factories, etc.) (won't be done)
+- [X] investigate issue
 - [ ] prepare test for investigated issue
 - [ ] introduce fix
 - [ ] verify fix with additional preparation of verification steps
 - I want to be able to see see all scores added ...
+
+NiceToHaves:
+- [x] CI with dockerization
+- [ ] brakeman integration
+- [ ] SonarCloud integration
 
 > :warning: **I will extend it later on, probably will di vide feature to smaller chunks.
