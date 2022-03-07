@@ -23,11 +23,6 @@ jobs:
 
       - name: Cache docker layers
         uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
-        with:
-          key: ${{ matrix.service }}-docker-cache-{hash}
-          restore-keys: |
-            ${{ matrix.service }}-docker-cache-
 
       - name: Build image
         run: |
