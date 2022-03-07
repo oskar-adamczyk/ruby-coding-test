@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class LeaderboardsController < ApplicationController
-  before_action :set_leaderboard, only: [:show, :edit, :update, :destroy, :add_score]
+  before_action :set_leaderboard, only: %i[show edit update destroy add_score]
 
   # GET /leaderboards
   def index
@@ -7,8 +9,7 @@ class LeaderboardsController < ApplicationController
   end
 
   # GET /leaderboards/1
-  def show
-  end
+  def show; end
 
   # GET /leaderboards/new
   def new
@@ -16,15 +17,14 @@ class LeaderboardsController < ApplicationController
   end
 
   # GET /leaderboards/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /leaderboards
   def create
     @leaderboard = Leaderboard.new(leaderboard_params)
 
     if @leaderboard.save
-      redirect_to @leaderboard, notice: 'Leaderboard was successfully created.'
+      redirect_to @leaderboard, notice: "Leaderboard was successfully created."
     else
       render :new
     end
@@ -33,7 +33,7 @@ class LeaderboardsController < ApplicationController
   # PATCH/PUT /leaderboards/1
   def update
     if @leaderboard.update(leaderboard_params)
-      redirect_to @leaderboard, notice: 'Leaderboard was successfully updated.'
+      redirect_to @leaderboard, notice: "Leaderboard was successfully updated."
     else
       render :edit
     end
@@ -42,19 +42,19 @@ class LeaderboardsController < ApplicationController
   # DELETE /leaderboards/1
   def destroy
     @leaderboard.destroy
-    redirect_to leaderboards_url, notice: 'Leaderboard was successfully destroyed.'
+    redirect_to leaderboards_url, notice: "Leaderboard was successfully destroyed."
   end
 
   def add_score
-    username, score = params[:username]
+    username, _score = params[:username]
     score = params[:score]
-    if @leaderboard.entries.where(username: username).exists?
+    if @leaderboard.entries.exists?(username: username)
       entry = @leaderboard.entries.where(username: username).first
       entry.update(score: score.to_i + entry.score)
     else
       @leaderboard.entries.create(username: username, score: score)
     end
-    redirect_to @leaderboard, notice: 'Score added'
+    redirect_to @leaderboard, notice: "Score added"
   end
 
   private
