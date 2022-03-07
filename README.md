@@ -73,7 +73,7 @@ TODOs:
 
 - preparation
 - [x] static analysis cleanup 
-- [ ] CI github actions pipeline
+- [x] CI github actions pipeline
 - [ ] dockerize
 - This f****** system doesn't even load some leaderboards!
 - [ ] setup easier reproduction env (seeds, factories, etc.)
