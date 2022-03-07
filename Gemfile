@@ -9,11 +9,12 @@ end
 
 gem "pg", "~> 1.1"
 gem "puma", "~> 3.7"
-gem "rails", "~> 5.1.4"
+gem "rails", "~> 5.2.4"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
 
 group :development, :test do
+  gem "brakeman"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "database_cleaner"
   gem "factory_bot_rails", ">= 5.0.1"

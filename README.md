@@ -84,14 +84,20 @@ I would ask if this should be possible and if not - then constrain it via valida
 6. Attached Simplecov to calculate code coverage. It is quite low but I left it as it is - I would love
 to improve it in future, but not waste time on that when I have some crucial hotfixes and feature to deliver.
 If I would use SonarCloud, we could setup additional, separate coverage threshold only for new / touched code.
-
+7. Updated some dependencies according to brakeman results.
+8. I assumed that this action will not be the most performance reliant. If it will be we can to some extend increase threads
+and pools but if we want to be prepared for the actual load, we should consider delegating
+this responsibility to some kind of background processing job. Endpoint would only accept request for adding score,
+actual calculation would be done immediately in background. I assumed that data consistency here is more important than
+performance, ofc., it should be discussed and (I would say even more important) introduced to app and measured afterwards.
+With measures it would be possible to decide about proper approach.
 
 TODOs:
 
 - preparation
-- [x] static analysis cleanup 
-- [x] CI github actions pipeline
-- [x] dockerize
+- [X] static analysis cleanup 
+- [X] CI github actions pipeline
+- [X] dockerize
 - This f****** system doesn't even load some leaderboards!
 - [X] setup easier reproduction env (seeds, factories, etc.)
 - [X] investigate issue
@@ -101,14 +107,19 @@ TODOs:
 - Last night I lost my score. I had 10 points, ...
 - [X] setup easier reproduction env (seeds, factories, etc.) (won't be done)
 - [X] investigate issue
-- [ ] prepare test for investigated issue
-- [ ] introduce fix
-- [ ] verify fix with additional preparation of verification steps
+- [X] prepare test for investigated issue
+- [X] introduce fix
+- [X] verify fix with additional preparation of verification steps (won't be done, not so easy, would be easier
+with -again- API :c jmeter or even xargs with concurrent cURLs)
 - I want to be able to see see all scores added ...
+- [ ] introduce listing of _subscores_
+- [ ] introduce adding _subscore_
+- [ ] introduce removing _subscore_
+- [ ] introduce leaderboard progress communication
+- [ ] add index with ORDER DESC and NULLS LAST to score
+- [ ] refactor add score - delegate to service object
 
 NiceToHaves:
-- [x] CI with dockerization
-- [ ] brakeman integration
+- [X] CI with dockerization
+- [X] brakeman integration
 - [ ] SonarCloud integration
-
-> :warning: **I will extend it later on, probably will di vide feature to smaller chunks.
