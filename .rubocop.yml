@@ -6,6 +6,7 @@ AllCops:
   DisplayCopNames: true
   Exclude:
     - "bin/*"
+    - "db/schema.rb"
     - "vendor/**/*"
   TargetRubyVersion: 2.5.8
 
