@@ -157,7 +157,6 @@ RSpec.describe LeaderboardsController, type: :controller do
     end
 
     # then
-
     it { expect(entry.reload.score).to eq 30 }
   end
 end
