@@ -84,9 +84,9 @@ TODOs:
 - [x] CI github actions pipeline
 - [x] dockerize
 - This f****** system doesn't even load some leaderboards!
-- [ ] setup easier reproduction env (seeds, factories, etc.)
-- [ ] investigate issue
-- [ ] prepare test for investigated issue
+- [X] setup easier reproduction env (seeds, factories, etc.)
+- [X] investigate issue
+- [X] prepare test for investigated issue
 - [ ] introduce fix
 - [ ] verify fix with additional preparation of verification steps
 - Last night I lost my score. I had 10 points, ...
@@ -96,5 +96,10 @@ TODOs:
 - [ ] introduce fix
 - [ ] verify fix with additional preparation of verification steps
 - I want to be able to see see all scores added ...
+
+NiceToHaves:
+- [ ] CI with dockerization
+- [ ] brakeman integration
+- [ ] SonarCloud integration
 
 > :warning: **I will extend it later on, probably will di vide feature to smaller chunks.
