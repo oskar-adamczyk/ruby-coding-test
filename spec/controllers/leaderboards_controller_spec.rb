@@ -124,7 +124,7 @@ RSpec.describe LeaderboardsController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
+  describe "DELETE #destroy", type: :transactional do
     it "destroys the requested leaderboard" do
       leaderboard = Leaderboard.create! valid_attributes
       expect do
@@ -139,7 +139,7 @@ RSpec.describe LeaderboardsController, type: :controller do
     end
   end
 
-  describe "POST #add_score" do
+  describe "POST #add_score", type: :transactional do
     # given
     let!(:leaderboard) { create :leaderboard, entries: [entry] }
     let(:entry) { build(:leaderboard_entry, score: nil) }
