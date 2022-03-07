@@ -3,7 +3,7 @@ name: Build and test changes on pull requests
 on:
   pull_request:
     branches:
-      - develop
+      - master
 
 env:
   COMPOSE_TEST_FILE_NAME: "docker-compose.test.yml"
