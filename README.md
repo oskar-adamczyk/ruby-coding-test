@@ -112,6 +112,10 @@ TODOs:
 - [X] verify fix with additional preparation of verification steps (won't be done, not so easy, would be easier
 with -again- API :c jmeter or even xargs with concurrent cURLs)
 - I want to be able to see see all scores added ...
+- [ ] introduce listing of _subscores_
+- [ ] introduce adding _subscore_
+- [ ] introduce removing _subscore_
+- [ ] introduce leaderboard progress communication
 - [ ] add index with ORDER DESC and NULLS LAST to score
 - [ ] refactor add score - delegate to service object
 
