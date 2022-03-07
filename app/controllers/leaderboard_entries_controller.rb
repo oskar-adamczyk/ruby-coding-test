@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class LeaderboardEntriesController < ApplicationController
-  before_action :set_leaderboard_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_leaderboard_entry, only: %i[show edit update destroy]
 
   # GET /leaderboard_entries
   def index
@@ -7,8 +9,7 @@ class LeaderboardEntriesController < ApplicationController
   end
 
   # GET /leaderboard_entries/1
-  def show
-  end
+  def show; end
 
   # GET /leaderboard_entries/new
   def new
@@ -16,15 +17,14 @@ class LeaderboardEntriesController < ApplicationController
   end
 
   # GET /leaderboard_entries/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /leaderboard_entries
   def create
     @leaderboard_entry = LeaderboardEntry.new(leaderboard_entry_params)
 
     if @leaderboard_entry.save
-      redirect_to @leaderboard_entry, notice: 'Leaderboard entry was successfully created.'
+      redirect_to @leaderboard_entry, notice: "Leaderboard entry was successfully created."
     else
       render :new
     end
@@ -33,7 +33,7 @@ class LeaderboardEntriesController < ApplicationController
   # PATCH/PUT /leaderboard_entries/1
   def update
     if @leaderboard_entry.update(leaderboard_entry_params)
-      redirect_to @leaderboard_entry, notice: 'Leaderboard entry was successfully updated.'
+      redirect_to @leaderboard_entry, notice: "Leaderboard entry was successfully updated."
     else
       render :edit
     end
@@ -42,17 +42,18 @@ class LeaderboardEntriesController < ApplicationController
   # DELETE /leaderboard_entries/1
   def destroy
     @leaderboard_entry.destroy
-    redirect_to leaderboard_entries_url, notice: 'Leaderboard entry was successfully destroyed.'
+    redirect_to leaderboard_entries_url, notice: "Leaderboard entry was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_leaderboard_entry
-      @leaderboard_entry = LeaderboardEntry.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def leaderboard_entry_params
-      params.require(:leaderboard_entry).permit(:leaderboard_id, :username, :score)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_leaderboard_entry
+    @leaderboard_entry = LeaderboardEntry.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def leaderboard_entry_params
+    params.require(:leaderboard_entry).permit(:leaderboard_id, :username, :score)
+  end
 end

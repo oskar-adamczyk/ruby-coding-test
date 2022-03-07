@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "LeaderboardEntries", type: :request do
   describe "GET /leaderboard_entries" do

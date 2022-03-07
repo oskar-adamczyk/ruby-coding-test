@@ -61,3 +61,32 @@ That's it!
 * Assume the system receives a huge amount of traffic in production.
 * Assume that this is a successful company. This means this software **WILL GROW**. Keep that in mind when fixing/adding features.
 * We will evaluate solutions to the problems on several aspects like: design, complexity, attention to detail, correctness, performance, etc.
+
+## Solution
+
+### Made assumptions
+
+I have worked with ruby 2.5.8 version. It seems to be compatible with gems but in addition, it is supported by rubocop
+that I wanted to have here badly :)
+
+TODOs:
+
+- preparation
+- [x] static analysis cleanup 
+- [ ] CI github actions pipeline
+- [ ] dockerize
+- This f****** system doesn't even load some leaderboards!
+- [ ] setup easier reproduction env (seeds, factories, etc.)
+- [ ] investigate issue
+- [ ] prepare test for investigated issue
+- [ ] introduce fix
+- [ ] verify fix with additional preparation of verification steps
+- Last night I lost my score. I had 10 points, ...
+- [ ] setup easier reproduction env (seeds, factories, etc.)
+- [ ] investigate issue
+- [ ] prepare test for investigated issue
+- [ ] introduce fix
+- [ ] verify fix with additional preparation of verification steps
+- I want to be able to see see all scores added ...
+
+> :warning: **I will extend it later on, probably will di vide feature to smaller chunks.

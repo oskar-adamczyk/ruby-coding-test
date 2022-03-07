@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLeaderboardEntries < ActiveRecord::Migration[5.1]
   def change
     create_table :leaderboard_entries do |t|
