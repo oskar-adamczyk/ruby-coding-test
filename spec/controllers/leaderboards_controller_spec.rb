@@ -140,12 +140,24 @@ RSpec.describe LeaderboardsController, type: :controller do
   end
 
   describe "POST #add_score" do
-    it "adds score" do
-      leaderboard = Leaderboard.create! valid_attributes
+    # given
+    let!(:leaderboard) { create :leaderboard, entries: [entry] }
+    let(:entry) { build(:leaderboard_entry, score: nil) }
 
-      expect do
-        post :add_score, params: { id: leaderboard.id, username: "lala", score: 1 }
-      end.to change(LeaderboardEntry, :count).by(1)
+    # when
+    before do
+      threads = 10.times.map do
+        Thread.new do
+          post :add_score, params: { id: leaderboard.id, username: entry.username, score: 10 }
+        rescue AbstractController::DoubleRenderError
+          pp "Double render - no rspec solution for concurrent requests yet."
+        end
+      end
+      threads.each(&:join)
     end
+
+    # then
+
+    it { expect(entry.reload.score).to eq 100 }
   end
 end

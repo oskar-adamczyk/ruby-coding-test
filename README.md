@@ -89,9 +89,9 @@ If I would use SonarCloud, we could setup additional, separate coverage threshol
 TODOs:
 
 - preparation
-- [x] static analysis cleanup 
-- [x] CI github actions pipeline
-- [x] dockerize
+- [X] static analysis cleanup 
+- [X] CI github actions pipeline
+- [X] dockerize
 - This f****** system doesn't even load some leaderboards!
 - [X] setup easier reproduction env (seeds, factories, etc.)
 - [X] investigate issue
@@ -101,15 +101,16 @@ TODOs:
 - Last night I lost my score. I had 10 points, ...
 - [X] setup easier reproduction env (seeds, factories, etc.) (won't be done)
 - [X] investigate issue
-- [ ] prepare test for investigated issue
+- [X] prepare test for investigated issue
 - [ ] introduce fix
 - [ ] verify fix with additional preparation of verification steps
 - I want to be able to see see all scores added ...
 - [ ] add index with ORDER DESC and NULLS LAST to score
+- [ ] refactor add score - delegate to service object
 
 NiceToHaves:
-- [x] CI with dockerization
-- [x] brakeman integration
+- [X] CI with dockerization
+- [X] brakeman integration
 - [ ] SonarCloud integration
 
 > :warning: **I will extend it later on, probably will di vide feature to smaller chunks.
