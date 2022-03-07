@@ -85,6 +85,12 @@ I would ask if this should be possible and if not - then constrain it via valida
 to improve it in future, but not waste time on that when I have some crucial hotfixes and feature to deliver.
 If I would use SonarCloud, we could setup additional, separate coverage threshold only for new / touched code.
 7. Updated some dependencies according to brakeman results.
+8. I assumed that this action will not be the most performance reliant. If it will be we can to some extend increase threads
+and pools but if we want to be prepared for the actual load, we should consider delegating
+this responsibility to some kind of background processing job. Endpoint would only accept request for adding score,
+actual calculation would be done immediately in background. I assumed that data consistency here is more important than
+performance, ofc., it should be discussed and (I would say even more important) introduced to app and measured afterwards.
+With measures it would be possible to decide about proper approach.
 
 TODOs:
 
@@ -102,8 +108,9 @@ TODOs:
 - [X] setup easier reproduction env (seeds, factories, etc.) (won't be done)
 - [X] investigate issue
 - [X] prepare test for investigated issue
-- [ ] introduce fix
-- [ ] verify fix with additional preparation of verification steps
+- [X] introduce fix
+- [X] verify fix with additional preparation of verification steps (won't be done, not so easy, would be easier
+with -again- API :c jmeter or even xargs with concurrent cURLs)
 - I want to be able to see see all scores added ...
 - [ ] add index with ORDER DESC and NULLS LAST to score
 - [ ] refactor add score - delegate to service object
