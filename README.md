@@ -105,6 +105,7 @@ TODOs:
 - [ ] introduce fix
 - [ ] verify fix with additional preparation of verification steps
 - I want to be able to see see all scores added ...
+- [ ] add index with ORDER DESC and NULLS LAST to score
 
 NiceToHaves:
 - [x] CI with dockerization
