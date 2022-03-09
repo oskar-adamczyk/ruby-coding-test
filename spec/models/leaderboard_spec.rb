@@ -3,5 +3,10 @@
 require "rails_helper"
 
 RSpec.describe Leaderboard, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let!(:existing_leaderboard) { create :leaderboard }
+  subject { build :leaderboard }
+
+  it { is_expected.to be_valid_including_database }
+  it { is_expected.to have_many :entries }
+  it { is_expected.to validate_presence_of :name }
 end

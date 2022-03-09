@@ -92,7 +92,12 @@ actual calculation would be done immediately in background. I assumed that data 
 performance, ofc., it should be discussed and (I would say even more important) introduced to app and measured afterwards.
 With measures it would be possible to decide about proper approach.
 9. I assumed that it is better idea to move concurrent test from request layer (integration-e2e-ish) to unit, directly
-on service object. Faster execution + more precise control. 
+on service object. Faster execution + more precise control.
+10. Extended view and query with includes. I assumed that this is enough for requirement, we do not need new view.
+In normal circumstances I would ask about that ofc. Additionally, introduced Bullet to avoid n+1 queries.
+11. I assumed that leaderboard entry must not have empty username. Additionally, I assumed that all records are valid.
+If it would be not true, we would need to introduce backfill migration for invalid rows.
+12. Ditto for leaderboards.
 
 TODOs:
 
@@ -114,14 +119,18 @@ TODOs:
 - [X] verify fix with additional preparation of verification steps (won't be done, not so easy, would be easier
 with -again- API :c jmeter or even xargs with concurrent cURLs)
 - I want to be able to see see all scores added ...
-- [ ] introduce listing of _subscores_
+- [X] introduce listing of _subscores_
 - [X] introduce adding _subscore_
 - [ ] introduce removing _subscore_
 - [ ] introduce leaderboard progress communication
-- [ ] add index with ORDER DESC and NULLS LAST to score
+- [X] ~~add index with ORDER DESC and NULLS LAST to score~~ will not happen, probably not that much results to order,
+not real performance issue. If it would be (do we expect to have many results per Leaderboard? doubt that, but would ask business,
+probably even better, measure it after release of feature). Instead introduced unique index for leaderboard_id + username
+(we query by them)
 - [X] refactor add score - delegate to service object
 
 NiceToHaves:
 - [X] CI with dockerization
 - [X] brakeman integration
-- [ ] SonarCloud integration
+- [X] add Bullet to detect n+1 queries
+- [X] SonarCloud integration

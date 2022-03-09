@@ -2,5 +2,9 @@
 
 class LeaderboardEntry < ApplicationRecord
   belongs_to :leaderboard
-  has_many :scores, dependent: :destroy
+  has_many :scores, -> { order(created_at: :desc) }, dependent: :destroy, inverse_of: :entry
+
+  validates :username,
+            presence: true,
+            uniqueness: { case_sensitive: false, scope: :leaderboard_id }
 end

@@ -10,24 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_09_144210) do
+ActiveRecord::Schema.define(version: 2022_03_09_183900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "leaderboard_entries", force: :cascade do |t|
     t.bigint "leaderboard_id"
-    t.string "username"
+    t.string "username", null: false
     t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "lower((username)::text), leaderboard_id", name: "index_leaderboard_entries_on_lower_username_leaderboard_id", unique: true
     t.index ["leaderboard_id"], name: "index_leaderboard_entries_on_leaderboard_id"
   end
 
   create_table "leaderboards", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "lower((name)::text)", name: "index_leaderboards_on_lower_name", unique: true
   end
 
   create_table "scores", force: :cascade do |t|
