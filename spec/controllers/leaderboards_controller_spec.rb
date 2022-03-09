@@ -138,25 +138,4 @@ RSpec.describe LeaderboardsController, type: :controller do
       expect(response).to redirect_to(leaderboards_url)
     end
   end
-
-  describe "POST #add_score", type: :transactional do
-    # given
-    let!(:leaderboard) { create :leaderboard, entries: [entry] }
-    let(:entry) { build(:leaderboard_entry, score: nil) }
-
-    # when
-    before do
-      threads = 3.times.map do
-        Thread.new do
-          post :add_score, params: { id: leaderboard.id, username: entry.username, score: 10 }
-        rescue AbstractController::DoubleRenderError
-          Rails.logger.debug "Double render - no rspec solution for concurrent requests yet"
-        end
-      end
-      threads.each(&:join)
-    end
-
-    # then
-    it { expect(entry.reload.score).to eq 30 }
-  end
 end

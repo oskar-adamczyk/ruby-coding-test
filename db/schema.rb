@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180328212903) do
+ActiveRecord::Schema.define(version: 2022_03_09_144210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,5 +30,14 @@ ActiveRecord::Schema.define(version: 20180328212903) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "scores", force: :cascade do |t|
+    t.bigint "leaderboard_entry_id"
+    t.integer "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["leaderboard_entry_id"], name: "index_scores_on_leaderboard_entry_id"
+  end
+
   add_foreign_key "leaderboard_entries", "leaderboards"
+  add_foreign_key "scores", "leaderboard_entries"
 end

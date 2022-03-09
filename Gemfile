@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "dry-struct"
 gem "pg", "~> 1.1"
 gem "puma", "~> 3.7"
 gem "rails", "~> 5.2.4"
@@ -23,6 +24,7 @@ group :development, :test do
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
+  gem "shoulda-matchers", "~> 3.1", ">= 3.1.3"
   # Generates a test coverage report on every `bundle exec rspec` call. We use
   # the output to feed SonarCloud's stats and analysis. It does not yet support
   # version >= 0.18 hence locked to 0.17.1

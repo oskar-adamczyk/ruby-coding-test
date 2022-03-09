@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :leaderboard_entries
   resources :leaderboards do
     post :add_score, on: :member
+    scope module: :leaderboards do
+      resources :scores, only: %i[create]
+    end
   end
 
   root to: "leaderboards#index"

@@ -12,9 +12,9 @@ end
 
 FactoryBot.create(
   :leaderboard, name: "My Leaderboard", entries: [
-    FactoryBot.build(:leaderboard_entry, username: "Jane", score: 3),
-    FactoryBot.build(:leaderboard_entry, username: "Jack", score: 10),
-    FactoryBot.build(:leaderboard_entry, username: "John", score: 9),
-    FactoryBot.build(:leaderboard_entry, username: "June", score: nil)
+    FactoryBot.build(:leaderboard_entry, :with_scores, username: "Jane", score: 3),
+    FactoryBot.build(:leaderboard_entry, :with_scores, username: "Jack", score: 10),
+    FactoryBot.build(:leaderboard_entry, :with_scores, username: "John", score: 9),
+    FactoryBot.build(:leaderboard_entry, username: "June")
   ]
 )
