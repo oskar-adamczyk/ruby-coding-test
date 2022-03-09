@@ -49,7 +49,7 @@ describe ScoreServices::Create, type: :transactional do
   [
     [{ score: -1 }, "lower than minimum score"],
     [{ score: 101 }, "higher than maximum score"],
-    [{ score: "not_coercible_to_integer" }, "with string score"],
+    [{ score: "not_coercible_to_integer" }, "string score"],
     [{ leaderboard_id: "not_existing" }, "not existing leaderboard"]
   ].each do |subject_params, description|
     context "with #{description}" do

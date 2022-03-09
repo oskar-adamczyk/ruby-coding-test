@@ -64,6 +64,22 @@ That's it!
 
 ## Solution
 
+### Dockerized setup instructions
+
+```bash
+cp .env.example .env
+docker-compose up
+```
+
+or if we want to keep using 100% local app
+
+```bash
+cp .env.example .env
+docker-compose up -d db
+echo "127.0.0.1 db" | sudo tee -a /etc/hosts
+rails s
+```
+
 ### Made assumptions
 
 1. I have worked with ruby 2.5.8 version. It seems to be compatible with gems but in addition, it is supported by rubocop
@@ -121,7 +137,7 @@ with -again- API :c jmeter or even xargs with concurrent cURLs)
 - I want to be able to see see all scores added ...
 - [X] introduce listing of _subscores_
 - [X] introduce adding _subscore_
-- [ ] introduce removing _subscore_
+- [X] introduce removing _subscore_
 - [ ] introduce leaderboard progress communication
 - [X] ~~add index with ORDER DESC and NULLS LAST to score~~ will not happen, probably not that much results to order,
 not real performance issue. If it would be (do we expect to have many results per Leaderboard? doubt that, but would ask business,
@@ -134,3 +150,9 @@ NiceToHaves:
 - [X] brakeman integration
 - [X] add Bullet to detect n+1 queries
 - [X] SonarCloud integration
+
+Planned improvements:
+- [ ] CD pipeline with some heroku deployment (or something more fancy with terraform)
+- [ ] introduce GoodJob (or Sidekiq, but at this point 100% overkill) background jobs processor
+- [ ] introduce couple cypress (or cucumber) e2e tests
+- [ ] extend CI (with or without SonarCloud, would recommend include it) with other events (currently only PR to master)

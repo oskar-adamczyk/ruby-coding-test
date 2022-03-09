@@ -13,12 +13,12 @@ RSpec.describe "Leaderboard entries Scores", type: :request do
     let(:score_id) { score.id }
 
     # when
-    before { delete leaderboard_entry_score_path(leaderboard_entry_id: entry_id), id: score_id }
+    before { delete leaderboard_entry_score_path(id: score_id, leaderboard_entry_id: entry_id) }
 
     context "with existing id" do
       # then
       it "should redirect to leaderboard and display success message" do
-        expect(response).to redirect_to(leaderboard)
+        expect(response).to redirect_to(entry.leaderboard)
         expect(flash[:notice]).not_to be_nil
         expect(flash[:error]).to be_nil
       end

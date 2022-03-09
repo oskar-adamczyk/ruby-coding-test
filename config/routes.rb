@@ -2,9 +2,14 @@
 
 Rails.application.routes.draw do
   resources :leaderboards do
-    post :add_score, on: :member
     scope module: :leaderboards do
       resources :scores, only: %i[create]
+    end
+  end
+
+  resources :leaderboard_entries, only: [] do
+    scope module: :leaderboard_entries do
+      resources :scores, only: %i[destroy]
     end
   end
 

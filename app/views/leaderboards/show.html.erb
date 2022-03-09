@@ -14,7 +14,14 @@
       <%= entry.username %> - <%= entry.score %>
       <ol style="padding-bottom: 5px">
         <% entry.scores.each do |score| %>
-          <li><%= score.value %> - <%= score.created_at %></li>
+          <li>
+            <%= score.value %> - <%= score.created_at %>
+            <%=
+              form_tag leaderboard_entry_score_path(leaderboard_entry_id: entry.id, id: score.id), method: :delete do
+            %>
+              <%= submit_tag "X" %>
+            <% end -%>
+          </li>
         <% end -%>
       </ol>
     </li>
