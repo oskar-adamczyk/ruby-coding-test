@@ -12,7 +12,7 @@ describe ScoreServices::Create, type: :transactional do
     { leaderboard_id: leaderboard_id, score: attributes_for(:score)[:value], username: username }
   end
   let(:username) { "John" }
-  let!(:leaderboard) { create :leaderboard }
+  let!(:leaderboard) { create :leaderboard, entries: build_list(:leaderboard_entry, 2) }
   let(:leaderboard_id) { leaderboard.id }
 
   [
@@ -29,6 +29,13 @@ describe ScoreServices::Create, type: :transactional do
       it { expect(subject.score).to be_a Score }
       it { expect(subject.score.value).to eq subject_params[:score] }
     end
+  end
+
+  context "with calculating progress" do
+    let!(:leaderboard) { create :leaderboard, entries: build_list(:leaderboard_entry, 2, :with_scores, score: 10) }
+    let(:attributes) { super().merge(score: 20) }
+
+    it { expect(subject.progress).to eq 2 }
   end
 
   context "with concurrent calls" do

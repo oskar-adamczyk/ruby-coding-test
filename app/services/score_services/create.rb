@@ -7,12 +7,30 @@ module ScoreServices
     class Result < Dry::Struct
       include Dry.Types default: :nominal
 
+      attribute :progress, Strict::Integer
       attribute :score, Strict::Any.constrained(type: Score)
     end
 
     private
 
     attr_reader :params, :score
+
+    def perform
+      @score = Score.new
+      old_position = calculate_position
+
+      persist_score!
+
+      progress = old_position - calculate_position
+
+      Result.new progress: progress, score: score
+    end
+
+    def calculate_position
+      leaderboard_entry.leaderboard.entries.where(
+        LeaderboardEntry.arel_table[:score].gt(leaderboard_entry.score || 0)
+      ).count + 1
+    end
 
     def leaderboard
       @leaderboard ||= Leaderboard.find(params[:leaderboard_id])
@@ -22,14 +40,6 @@ module ScoreServices
 
     def leaderboard_entry
       @leaderboard_entry ||= leaderboard.entries.find_or_initialize_by(username: params[:username])
-    end
-
-    def perform
-      @score = Score.new
-
-      persist_score!
-
-      Result.new score: score
     end
 
     def persist_score!

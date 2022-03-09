@@ -24,12 +24,13 @@ describe ScoreServices::Destroy, type: :transactional do
     before do
       ThreadsWait.all_waits(
         Thread.new { described_class.call(**{ leaderboard_entry_id: entry_id, score_id: score_id }) },
+        Thread.new { described_class.call(**{ leaderboard_entry_id: entry_id, score_id: entry.scores.second.id }) },
         Thread.new { described_class.call(**{ leaderboard_entry_id: entry_id, score_id: entry.scores.last.id }) }
       )
     end
 
     # then
-    it { expect(entry.reload.score).to eq 10 }
+    it { expect(entry.reload.score).to be_nil }
   end
 
   [

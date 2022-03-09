@@ -114,6 +114,9 @@ In normal circumstances I would ask about that ofc. Additionally, introduced Bul
 11. I assumed that leaderboard entry must not have empty username. Additionally, I assumed that all records are valid.
 If it would be not true, we would need to introduce backfill migration for invalid rows.
 12. Ditto for leaderboards.
+13. Assumed that progress should be (as it is stated in ticket) only on adding score.
+Ofc we have some edge cases - how we should consider new entries, equal scores etc., but generic feature works as simple as possible :)
+I was a bit tired, so probably test could be written better, sorry :x
 
 TODOs:
 
@@ -138,7 +141,7 @@ with -again- API :c jmeter or even xargs with concurrent cURLs)
 - [X] introduce listing of _subscores_
 - [X] introduce adding _subscore_
 - [X] introduce removing _subscore_
-- [ ] introduce leaderboard progress communication
+- [X] introduce leaderboard progress communication
 - [X] ~~add index with ORDER DESC and NULLS LAST to score~~ will not happen, probably not that much results to order,
 not real performance issue. If it would be (do we expect to have many results per Leaderboard? doubt that, but would ask business,
 probably even better, measure it after release of feature). Instead introduced unique index for leaderboard_id + username
