@@ -8,7 +8,7 @@ FactoryBot.define do
 
     trait :with_scores do
       score { Faker::Number.number digits: 2 }
-      scores { build_list :score, 1, score: score }
+      scores { build_list :score, 1, value: score }
     end
 
     trait :without_leaderboard do

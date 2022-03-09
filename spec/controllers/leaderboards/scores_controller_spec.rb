@@ -2,15 +2,17 @@
 
 require "rails_helper"
 
-RSpec.describe ScoresController, type: :controller do
+RSpec.describe Leaderboards::ScoresController, type: :controller do
   # given
-  let(:score_attributes) { attributes_for(:score).merge(leaderboard_id: leaderboard_id, username: username) }
+  let(:score_attributes) do
+    { score: attributes_for(:score)[:value], username: username }
+  end
   let(:username) { Faker::Name.first_name }
   let(:leaderboard) { create :leaderboard }
   let(:leaderboard_id) { leaderboard.id }
 
-  describe "POST #create" do
-    let(:create_call) { post :create, params: { score: score_attributes }, session: {} }
+  describe "POST #create", type: :transactional do
+    let(:create_call) { post :create, params: { leaderboard_id: leaderboard_id, score: score_attributes }, session: {} }
 
     context "with valid params" do
       # when then
