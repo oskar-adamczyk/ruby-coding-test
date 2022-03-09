@@ -2,8 +2,12 @@
 
 class Leaderboard < ApplicationRecord
   has_many :entries,
-           -> { order("COALESCE(score, 0) DESC") },
+           -> { order(Arel.sql("COALESCE(score, 0) DESC")) },
            class_name: "LeaderboardEntry",
            dependent: :destroy,
            inverse_of: :leaderboard
+
+  validates :name,
+            presence: true,
+            uniqueness: { case_sensitive: false }
 end

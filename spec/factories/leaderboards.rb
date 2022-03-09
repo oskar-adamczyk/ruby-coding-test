@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :leaderboard do
-    name { Faker::Company.name }
+    sequence(:name) { |i| "#{Faker::Company.name}#{i}" }
 
     trait :with_entries do
       entries { build_list :leaderboard_entry, 2, :with_scores }

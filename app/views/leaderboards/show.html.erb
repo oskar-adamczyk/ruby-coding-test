@@ -10,7 +10,14 @@
   <p>Entries:</p>
   <ol>
     <% @leaderboard.entries.each do |entry| %>
-    <li><%= entry.username %> - <%= entry.score %></li>
+    <li>
+      <%= entry.username %> - <%= entry.score %>
+      <ol style="padding-bottom: 5px">
+        <% entry.scores.each do |score| %>
+          <li><%= score.value %> - <%= score.created_at %></li>
+        <% end -%>
+      </ol>
+    </li>
   <% end -%>
   </ol>
 </div>

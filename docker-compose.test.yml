@@ -13,6 +13,9 @@ services:
       RAILS_ENV: test
     depends_on:
       - db
+    volumes:
+      - ./coverage:/app/coverage
+      - ./results:/app/results
 
   db:
     image: postgres:13.1-alpine

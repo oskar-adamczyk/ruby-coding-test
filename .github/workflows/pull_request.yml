@@ -7,6 +7,7 @@ on:
 
 env:
   COMPOSE_TEST_FILE_NAME: "docker-compose.test.yml"
+  SONAR_SCAN_ENABLED: ${{ secrets.SONAR_SCAN_ENABLED == 'true' }}
 
 jobs:
   build:
@@ -54,12 +55,32 @@ jobs:
           restore-keys: |
             ${{ matrix.service }}-docker-cache-
 
+      - name: Generate automatic tests results directories
+        # It is required to grant read and write permissions to coverage and results directories
+        # it allows docker container to store results in said directories, otherwise we would not get coverage report.
+        run: |
+          mkdir $GITHUB_WORKSPACE/coverage $GITHUB_WORKSPACE/results
+          sudo chmod -R a+rw $GITHUB_WORKSPACE/coverage $GITHUB_WORKSPACE/results
+
       - name: Run tests
         run: docker-compose -f $GITHUB_WORKSPACE/$COMPOSE_TEST_FILE_NAME run --rm ${{ matrix.service }} /app/checks.sh
 
-#      - name: SonarCloud Scan
-#        if: always() && ${{ secrets.SONAR_SCAN_ENABLED }} == '1'
-#        uses: sonarsource/sonarcloud-github-action@master
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Fix code coverage files paths for Sonar Cloud scanner
+        if: always()
+        # `"` prefix is required to avoid unnecessary sed replacement for docker + RoR files paths matching pattern
+        # `/app/app/(.*)`. We must not replace more than one `/app` prefix.
+        run: sed -i 's|"/app|"/github/workspace|g' ./coverage/.resultset.json
+
+      - name: Publish test results
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          check_name: Test Results
+          files: ./coverage/rspec.xml
+
+      - name: SonarCloud Scan
+        if: always() && (env.SONAR_SCAN_ENABLED == 'true')
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-bundle exec rubocop || exit 1
+bundle exec rubocop --format progress --format json --out ./results/rubocop.json || exit 1

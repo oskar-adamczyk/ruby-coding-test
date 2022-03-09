@@ -26,16 +26,7 @@ require "rails_helper"
 # `rails-controller-testing` gem.
 
 RSpec.describe LeaderboardsController, type: :controller do
-  # This should return the minimal set of attributes required to create a valid
-  # Leaderboard. As you add validations to Leaderboard, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) do
-    { name: "test" }
-  end
-
-  let(:invalid_attributes) do
-    skip("Add a hash of attributes invalid for your model")
-  end
+  let(:invalid_attributes) { { name: nil } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -44,32 +35,32 @@ RSpec.describe LeaderboardsController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      _leaderboard = Leaderboard.create! valid_attributes
+      _leaderboard = Leaderboard.create! attributes_for(:leaderboard)
       get :index, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #show" do
     it "returns a success response" do
-      leaderboard = Leaderboard.create! valid_attributes
+      leaderboard = Leaderboard.create! attributes_for(:leaderboard)
       get :show, params: { id: leaderboard.to_param }, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #edit" do
     it "returns a success response" do
-      leaderboard = Leaderboard.create! valid_attributes
+      leaderboard = Leaderboard.create! attributes_for(:leaderboard)
       get :edit, params: { id: leaderboard.to_param }, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -77,12 +68,12 @@ RSpec.describe LeaderboardsController, type: :controller do
     context "with valid params" do
       it "creates a new Leaderboard" do
         expect do
-          post :create, params: { leaderboard: valid_attributes }, session: valid_session
+          post :create, params: { leaderboard: attributes_for(:leaderboard) }, session: valid_session
         end.to change(Leaderboard, :count).by(1)
       end
 
       it "redirects to the created leaderboard" do
-        post :create, params: { leaderboard: valid_attributes }, session: valid_session
+        post :create, params: { leaderboard: attributes_for(:leaderboard) }, session: valid_session
         expect(response).to redirect_to(Leaderboard.last)
       end
     end
@@ -90,50 +81,48 @@ RSpec.describe LeaderboardsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { leaderboard: invalid_attributes }, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) do
-        skip("Add a hash of attributes valid for your model")
-      end
+      let(:new_attributes) { { name: nil } }
 
       it "updates the requested leaderboard" do
-        leaderboard = Leaderboard.create! valid_attributes
+        leaderboard = Leaderboard.create! attributes_for(:leaderboard)
         put :update, params: { id: leaderboard.to_param, leaderboard: new_attributes }, session: valid_session
         leaderboard.reload
-        skip("Add assertions for updated state")
       end
 
       it "redirects to the leaderboard" do
-        leaderboard = Leaderboard.create! valid_attributes
-        put :update, params: { id: leaderboard.to_param, leaderboard: valid_attributes }, session: valid_session
+        leaderboard = Leaderboard.create! attributes_for(:leaderboard)
+        put :update, params: { id: leaderboard.to_param, leaderboard: attributes_for(:leaderboard) },
+                     session: valid_session
         expect(response).to redirect_to(leaderboard)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        leaderboard = Leaderboard.create! valid_attributes
+        leaderboard = Leaderboard.create! attributes_for(:leaderboard)
         put :update, params: { id: leaderboard.to_param, leaderboard: invalid_attributes }, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
 
   describe "DELETE #destroy", type: :transactional do
     it "destroys the requested leaderboard" do
-      leaderboard = Leaderboard.create! valid_attributes
+      leaderboard = Leaderboard.create! attributes_for(:leaderboard)
       expect do
         delete :destroy, params: { id: leaderboard.to_param }, session: valid_session
       end.to change(Leaderboard, :count).by(-1)
     end
 
     it "redirects to the leaderboards list" do
-      leaderboard = Leaderboard.create! valid_attributes
+      leaderboard = Leaderboard.create! attributes_for(:leaderboard)
       delete :destroy, params: { id: leaderboard.to_param }, session: valid_session
       expect(response).to redirect_to(leaderboards_url)
     end

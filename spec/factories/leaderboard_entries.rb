@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :leaderboard_entry do
     leaderboard
     score { nil }
-    username { Faker::Name.first_name }
+    sequence(:username) { |i| "#{Faker::Name.first_name}#{i}" }
 
     trait :with_scores do
       score { Faker::Number.number digits: 2 }

@@ -16,10 +16,12 @@ gem "uglifier", ">= 1.3.0"
 
 group :development, :test do
   gem "brakeman"
+  gem "bullet"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "database_cleaner"
   gem "factory_bot_rails", ">= 5.0.1"
   gem "faker"
+  gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
@@ -29,6 +31,7 @@ group :development, :test do
   # the output to feed SonarCloud's stats and analysis. It does not yet support
   # version >= 0.18 hence locked to 0.17.1
   gem "simplecov", "~> 0.17.1", require: false
+  gem "simplecov-json", require: false
 end
 
 group :development do

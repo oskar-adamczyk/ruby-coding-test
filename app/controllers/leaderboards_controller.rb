@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LeaderboardsController < ApplicationController
-  before_action :set_leaderboard, only: %i[show edit update destroy]
+  before_action :set_leaderboard, only: %i[edit update destroy]
 
   # GET /leaderboards
   def index
@@ -9,7 +9,9 @@ class LeaderboardsController < ApplicationController
   end
 
   # GET /leaderboards/1
-  def show; end
+  def show
+    @leaderboard = Leaderboard.includes(entries: :scores).find(params[:id])
+  end
 
   # GET /leaderboards/new
   def new
