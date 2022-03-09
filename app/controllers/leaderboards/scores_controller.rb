@@ -8,8 +8,11 @@ module Leaderboards
     rescue_from Errors::UnprocessableEntity, with: :invalid_score
 
     def create
-      ::ScoreServices::Create.call(score_params)
-      redirect_to @leaderboard, flash: { notice: "Score added" }
+      ScoreServices::Create.call(score_params).tap do |res|
+        redirect_to @leaderboard, flash: {
+          notice: "Score added. #{score_params[:username]} has progressed by #{res.progress} place(s)"
+        }
+      end
     end
 
     private

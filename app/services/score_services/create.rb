@@ -1,54 +1,35 @@
 # frozen_string_literal: true
 
 module ScoreServices
-  class Create
+  class Create < RetriableService
     ADD_SCORE_MAX_RETRIES = 10
 
     class Result < Dry::Struct
       include Dry.Types default: :nominal
 
+      attribute :progress, Strict::Integer
       attribute :score, Strict::Any.constrained(type: Score)
-    end
-
-    def initialize(params)
-      @params = params
-    end
-
-    def self.call(params)
-      new(params).call
-    end
-
-    def call
-      @score = Score.new
-
-      ApplicationRecord.transaction isolation: :serializable do
-        create_score!
-      end
-    rescue ActiveRecord::SerializationFailure => e
-      Rails.logger.warn "SerializationFailure"
-
-      raise_serialization_failure! e if max_retries_reached?
-
-      @retry_attempt ||= 0
-      @retry_attempt += 1
-
-      sleep(rand / 100)
-      retry
     end
 
     private
 
     attr_reader :params, :score
 
-    def create_score!
-      score.assign_attributes(entry: leaderboard_entry, value: params[:score])
+    def perform
+      @score = Score.new
+      old_position = calculate_position
 
-      validate_score!
+      persist_score!
 
-      score.save!
-      leaderboard_entry.update!(score: leaderboard_entry.score.to_i + params[:score].to_i)
+      progress = old_position - calculate_position
 
-      Result.new score: score
+      Result.new progress: progress, score: score
+    end
+
+    def calculate_position
+      leaderboard_entry.leaderboard.entries.where(
+        LeaderboardEntry.arel_table[:score].gt(leaderboard_entry.score || 0)
+      ).count + 1
     end
 
     def leaderboard
@@ -61,13 +42,13 @@ module ScoreServices
       @leaderboard_entry ||= leaderboard.entries.find_or_initialize_by(username: params[:username])
     end
 
-    def max_retries_reached?
-      @retry_attempt == ADD_SCORE_MAX_RETRIES
-    end
+    def persist_score!
+      score.assign_attributes(entry: leaderboard_entry, value: params[:score])
 
-    def raise_serialization_failure!(error)
-      @retry_attempt = nil
-      raise error
+      validate_score!
+
+      score.save!
+      leaderboard_entry.update!(score: leaderboard_entry.score.to_i + params[:score].to_i)
     end
 
     def validate_score!
