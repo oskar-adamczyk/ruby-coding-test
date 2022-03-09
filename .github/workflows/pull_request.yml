@@ -57,9 +57,9 @@ jobs:
       - name: Run tests
         run: docker-compose -f $GITHUB_WORKSPACE/$COMPOSE_TEST_FILE_NAME run --rm ${{ matrix.service }} /app/checks.sh
 
-      - name: SonarCloud Scan
-        if: always() && ${{ secrets.SONAR_SCAN_ENABLED }} == '1'
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      - name: SonarCloud Scan
+#        if: always() && ${{ secrets.SONAR_SCAN_ENABLED }} == '1'
+#        uses: sonarsource/sonarcloud-github-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
