@@ -5,7 +5,7 @@ FactoryBot.define do
     name { Faker::Company.name }
 
     trait :with_entries do
-      entries { build_list :leaderboard_entry, 2 }
+      entries { build_list :leaderboard_entry, 2, :with_scores }
     end
   end
 end

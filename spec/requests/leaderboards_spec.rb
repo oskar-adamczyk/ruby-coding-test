@@ -17,7 +17,7 @@ RSpec.describe "Leaderboards", type: :request do
   describe "GET /leaderboards/:id" do
     # given
     let!(:leaderboard) { create :leaderboard, entries: entries }
-    let(:entries) { build_list(:leaderboard_entry, 2) << build(:leaderboard_entry, score: nil) }
+    let(:entries) { build_list(:leaderboard_entry, 2, :with_scores) << build(:leaderboard_entry) }
 
     # when
     before { get leaderboard_path(id: leaderboard.id) }
