@@ -5,13 +5,13 @@ require "rails_helper"
 RSpec.describe "Scores", type: :request do
   describe "POST /scores" do
     # given
-    let(:valid_score_attributes) { attributes_for(:score).merge(leaderboard_id: leaderboard_id, username: username) }
+    let(:score_attributes) { attributes_for(:score).merge(leaderboard_id: leaderboard_id, username: username) }
     let(:username) { Faker::Name.first_name }
     let(:leaderboard) { create :leaderboard }
     let(:leaderboard_id) { leaderboard.id }
 
     # when
-    before { post :create, params: { score: valid_score_attributes }, session: {} }
+    before { post :create, params: { score: score_attributes }, session: {} }
 
     context "with valid params" do
       # then
