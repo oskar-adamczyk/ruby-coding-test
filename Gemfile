@@ -7,10 +7,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "activestorage", "~> 5.2.6.3"
 gem "dry-struct"
+gem "nokogiri", "~> 1.13.3"
 gem "pg", "~> 1.1"
-gem "puma", "~> 3.7"
-gem "rails", "~> 5.2.4"
+gem "puma", "~> 5.6.2"
+gem "rails", "~> 5.2.5"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
 
