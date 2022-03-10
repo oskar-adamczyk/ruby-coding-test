@@ -3,8 +3,8 @@
 require "database_cleaner"
 require "faker"
 
-def seed_leadeboard
-  return Rails.logger.info "Leaderboard exists, skipping" if Leaderboard.find_by(name: "My Leaderboard")
+def seed_leaderboard
+  return Logger.new($stdout).info "Leaderboard exists, skipping" if Leaderboard.find_by name: "My Leaderboard"
 
   FactoryBot.create(
     :leaderboard, name: "My Leaderboard", entries: [
@@ -23,4 +23,4 @@ if ENV["CLEAR_DB"]
   DatabaseCleaner.clean
 end
 
-seed_leadeboard
+seed_leaderboard
