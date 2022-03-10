@@ -153,8 +153,10 @@ NiceToHaves:
 - [X] brakeman integration
 - [X] add Bullet to detect n+1 queries
 - [X] SonarCloud integration
+- [X] Dependabot alert fixed
 
 Planned improvements:
+- [ ] normalized error handling
 - [ ] CD pipeline with some heroku deployment (or something more fancy with terraform)
 - [ ] introduce GoodJob (or Sidekiq, but at this point 100% overkill) background jobs processor
 - [ ] introduce couple cypress (or cucumber) e2e tests

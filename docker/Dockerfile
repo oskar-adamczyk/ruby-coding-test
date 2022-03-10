@@ -1,4 +1,4 @@
-FROM ruby:2.5.8-alpine3.13 as prod
+FROM ruby:2.6.6-alpine3.13 as prod
 
 ARG UID=1000
 RUN addgroup -g $UID -S ruby && \
