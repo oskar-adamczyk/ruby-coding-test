@@ -9,7 +9,7 @@ end
 
 gem "activestorage", "~> 5.2.6.3"
 gem "dry-struct"
-gem "nokogiri", "~> 1.13.3"
+gem "nokogiri", "~> 1.13.5"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.6.2"
 gem "rails", "~> 5.2.5"
